@@ -11,6 +11,6 @@ The paper was accepted by the 2021 IEEE Int. Conf. Computer Vision (ICCV), 2021
 Coming soon
 
 ## ICCV-video
-[https://www.youtube.com/watch?v=gJDe4lRxw8E](https://www.youtube.com/watch?v=gJDe4lRxw8E)
+[https://www.youtube.com/watch?v=XPz7laloKws&t=196s](https://www.youtube.com/watch?v=XPz7laloKws&t=196s)
 
 
