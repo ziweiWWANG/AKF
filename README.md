@@ -9,6 +9,7 @@ The paper was accepted by the 2021 IEEE Int. Conf. Computer Vision (ICCV), 2021
 https://openaccess.thecvf.com/content/ICCV2021/papers/Wang_An_Asynchronous_Kalman_Filter_for_Hybrid_Event_Cameras_ICCV_2021_paper.pdf
 <pre>
 
+## Citation
 If you use or discuss our AKF, please cite our paper as follows:
 ```
 @InProceedings{Wang_2021_ICCV,
@@ -20,6 +21,7 @@ If you use or discuss our AKF, please cite our paper as follows:
     pages     = {448-457}
 }
 ```
+
 
 ## Video
 [https://www.youtube.com/watch?v=XPz7laloKws](https://www.youtube.com/watch?v=XPz7laloKws)
