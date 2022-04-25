@@ -10,6 +10,7 @@ https://openaccess.thecvf.com/content/ICCV2021/papers/Wang_An_Asynchronous_Kalma
 <pre>
 
 If you use or discuss our AKF, please cite our paper as follows:
+```
 @InProceedings{Wang_2021_ICCV,
     author    = {Wang, Ziwei and Ng, Yonhon and Scheerlinck, Cedric and Mahony, Robert},
     title     = {An Asynchronous Kalman Filter for Hybrid Event Cameras},
@@ -18,8 +19,7 @@ If you use or discuss our AKF, please cite our paper as follows:
     year      = {2021},
     pages     = {448-457}
 }
-</pre>
-
+```
 
 ## Video
 [https://www.youtube.com/watch?v=XPz7laloKws](https://www.youtube.com/watch?v=XPz7laloKws)
