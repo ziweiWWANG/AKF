@@ -1,6 +1,5 @@
-# For academic use only
-
-## An Asynchronous Kalman Filter for Hybrid Event Cameras
+# An Asynchronous Kalman Filter for Hybrid Event Cameras
+## For academic use only
 
 Ziwei Wang, Yonhon Ng, Cedric Scheerlinck and Robert Mahony
 
