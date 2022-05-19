@@ -50,7 +50,6 @@ function akf_reconstruction(DataName, deblur_option, ...
     %% load dataset
     image = []; events = [];    
     load_data_add = sprintf(['./data/' DataName '.mat']);
-    data = load(load_data_add);
     load(load_data_add, 'ct', 'events', 'exposure', 'f_Q', 'image', 'post_process', 'time_image');
     dims = load(load_data_add, 'height', 'width');
     
