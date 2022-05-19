@@ -50,15 +50,18 @@ function akf_reconstruction(DataName, deblur_option, ...
     %% load dataset
     image = []; events = [];    
     load_data_add = sprintf(['./data/' DataName '.mat']);
-    load(load_data_add);
+    data = load(load_data_add);
+    load(load_data_add, 'ct', 'events', 'exposure', 'f_Q', 'image', 'post_process', 'time_image');
+    dims = load(load_data_add, 'height', 'width');
+    
     %% initialization
     [ts_array_,ts_array_2,frame_idx,R_inv_array,C,weight]...
-        = initialization(height, width);
+        = initialization(dims.height, dims.width);
     frame_time = floor(1/framerate * 1e6);
     frame_start = 2;
     frame_end =  length(time_image); 
     safety_offset = 1;
-    P = zeros(height,width) + p_ini; 
+    P = zeros(dims.height,dims.width) + p_ini; 
     new_frame_f = 1;
     write_output_f = 0;
     img_idx_now = frame_start;
@@ -87,7 +90,7 @@ function akf_reconstruction(DataName, deblur_option, ...
     log_deblur_image_now(:,:,1) = log(double(output_deblur_t1) + safety_offset);
     log_deblur_image_now(:,:,2) = log(double(output_deblur_t2) + safety_offset);
     log_intensity_state_ = log_deblur_image_now(:,:,1);
-    ct_scale = compute_ct_scale(width,height,ct,exposure,log_deblur_image_now,time_image,events,img_idx_now);   
+    ct_scale = compute_ct_scale(dims.width,dims.height,ct,exposure,log_deblur_image_now,time_image,events,img_idx_now);   
     % assume forwards and backbards interpolation are the same at the begining
     log_output_interp_t1 = log_deblur_image_now(:,:,1);
     log_output_interp_t2 = log_output_interp_t1;   
@@ -105,7 +108,7 @@ function akf_reconstruction(DataName, deblur_option, ...
         %% need deblur => update reference image inside exposure time    
         elseif deblur_option && (ts > img_now_ts_1) && (ts <= img_now_ts_2)
             if new_frame_f
-                output_deblur_1_log = deblur_edge_left(width,height,min_ct_scale,max_ct_scale,ct_scale,img_idx_now,time_image,exposure(img_idx_now),events,image,ct,safety_offset); 
+                output_deblur_1_log = deblur_edge_left(dims.width,dims.height,min_ct_scale,max_ct_scale,ct_scale,img_idx_now,time_image,exposure(img_idx_now),events,image,ct,safety_offset); 
                 log_intensity_now_ = output_deblur_1_log;
                 new_frame_f = 0;
             else
@@ -133,7 +136,7 @@ function akf_reconstruction(DataName, deblur_option, ...
                 ts_array_(:) = ts;
                 
                 % output images and timestamps
-                output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,height,width,folder,P,log_intensity_state_)
+                output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,dims.height,dims.width,folder,P,log_intensity_state_)
                 output_img_ts = time_image(img_idx_now) / 1e6;
                 output_img_ts = sprintf('%0.9f',output_img_ts);
                 outputIdxTs = sprintf(['image_' num2str(img_idx_now) '.png ' num2str(output_img_ts) '\n']);
@@ -157,7 +160,7 @@ function akf_reconstruction(DataName, deblur_option, ...
             ts_array_(:) = ts;
             
             % output images and timestamps
-            output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,height,width,folder,P,log_intensity_state_)
+            output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,dims.height,dims.width,folder,P,log_intensity_state_)
             output_img_ts = time_image(img_idx_now) / 1e6;
             output_img_ts = sprintf('%0.9f',output_img_ts);
             outputIdxTs = sprintf(['image_' num2str(img_idx_now) '.png ' num2str(output_img_ts) '\n']);
@@ -178,7 +181,7 @@ function akf_reconstruction(DataName, deblur_option, ...
 
             % deblur the first and the second image
             if deblur_option
-                [output_deblur_t1,output_deblur_t2] = deblur_edge_outer(width,height,min_ct_scale,max_ct_scale,ct_scale,img_idx_now,time_image,exposure(img_idx_now),events,image,ct,safety_offset);        
+                [output_deblur_t1,output_deblur_t2] = deblur_edge_outer(dims.width,dims.height,min_ct_scale,max_ct_scale,ct_scale,img_idx_now,time_image,exposure(img_idx_now),events,image,ct,safety_offset);        
             else
                 output_deblur_t1 = double(image(:,:,img_idx_now))/255;
                 output_deblur_t2 = double(image(:,:,img_idx_now + safety_offset))/255;
@@ -187,7 +190,7 @@ function akf_reconstruction(DataName, deblur_option, ...
             log_deblur_image_now(:,:,2) = log(double(output_deblur_t2) + safety_offset);          
             
             % update ct_scale between the first and the second image
-            ct_scale = compute_ct_scale(width,height,ct,exposure,log_deblur_image_now,time_image,events,img_idx_now);      
+            ct_scale = compute_ct_scale(dims.width,dims.height,ct,exposure,log_deblur_image_now,time_image,events,img_idx_now);      
 
             % update parameters for interpolation forward -- current time: time_image(img_idx_now) 
             log_output_interp_t1 = log_deblur_image_now(:,:,1);
@@ -234,11 +237,11 @@ function akf_reconstruction(DataName, deblur_option, ...
         C(y,x) = (log_intensity_state_(y,x) - log_intensity_now) ./ P(y,x);
         log_intensity_state_(y,x) = (1 ./ (1 ./ P(y,x) + R_inv_array(y,x) .* delta_t)) .* C(y,x) + log_intensity_now;
         log_intensity_state_(y,x) = log_intensity_state_(y,x) + contrast_threshold;   
-        if x > 1 && x < width && y > 1 && y < height && ((ts - ts_array_2(y,x)) > refractory_period)
+        if x > 1 && x < dims.width && y > 1 && y < dims.height && ((ts - ts_array_2(y,x)) > refractory_period)
             ts_neig = ts_array_2(y-1:y+1,x-1:x+1);
             Q_i = sigma_i * min(ts - ts_neig(:))/1e6; % in second, depends on neighbour pixels
             Q_r = 0;
-        elseif x > 1 && x < width && y > 1 && y < height && ((ts - ts_array_2(y,x)) <= refractory_period)
+        elseif x > 1 && x < dims.width && y > 1 && y < dims.height && ((ts - ts_array_2(y,x)) <= refractory_period)
             ts_neig = ts_array_2(y-1:y+1,x-1:x+1);
             Q_i = sigma_i * min(ts - ts_neig(:))/1e6; % in second, depends on neighbour pixels
             Q_r = sigma_r * min(ts - ts_array_2(y,x))/1e6;
@@ -306,8 +309,8 @@ function akf_reconstruction(DataName, deblur_option, ...
                 if use_median_filter
                     td_img = medfilt2(td_img,[3,3]);
                 end
-                for ii = 1:height
-                    for jj = 1:width
+                for ii = 1:dims.height
+                    for jj = 1:dims.width
                         if (P(ii,jj)) > 100 || isnan(P(ii,jj))
                            P(ii,jj) = 0.25;
                            td_img(ii,jj) = exp(log_intensity_now_(ii,jj))-safety_offset;
