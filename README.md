@@ -46,7 +46,7 @@ There are a few parameters that users can specify:
 10. 'max_ct_scale': the maximal value for the contrast threshold scaling factor, default 100. 
 11. 'p_ini': initial value for state covariance P, default 0.09. 
 
-### [Click To Download Example Datasets Download](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/Epc5ULLIIENAsDtNYycTdp4BtfG8Sn2ImaL44h_qhvf2jw?e=aRIV29)
+### [Click Here To Download Example Datasets](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/Epc5ULLIIENAsDtNYycTdp4BtfG8Sn2ImaL44h_qhvf2jw?e=aRIV29)
 Download the datasets and save them in folder './data'.
 Dataset name convention: DatasetName_StartFrame_EndFrame of the original dataset (we only keep the fast motion part or highly HDR part in the sample datasets. You can download the whole dataset sequence from the website of the following papers, and test if you like). The example datasets are publicly available datasets from:
 Mueggler et al., IJRR 2017.
