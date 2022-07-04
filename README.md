@@ -1,4 +1,10 @@
 # An Asynchronous Kalman Filter for Hybrid Event Cameras
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=XPz7laloKws">
+    <img src="figures/video_thumbnail.png" alt="An Asynchronous Kalman Filter for Hybrid Event Cameras" width="500"/>
+  </a>
+</p>
+
 ## For academic use only
 
 Ziwei Wang, Yonhon Ng, Cedric Scheerlinck and Robert Mahony
@@ -22,10 +28,6 @@ If you use or discuss our AKF, please cite our paper as follows:
     pages     = {448-457}
 }
 </pre>
-
-
-## Video
-[https://www.youtube.com/watch?v=XPz7laloKws](https://www.youtube.com/watch?v=XPz7laloKws)
 
 
 ## Code - How to use
