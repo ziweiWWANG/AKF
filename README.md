@@ -33,7 +33,7 @@ If you use or discuss our AKF, please cite our paper as follows:
 
 There are a few parameters that users can specify:
 
-### In file [./run_akf.m(https://github.com/ziweiWWANG/AKF/blob/main/run_akf.m)]:
+### In file [`./run_akf.m`](https://github.com/ziweiWWANG/AKF/blob/main/run_akf.m):
 
 |          Variable            | Description | Default Value |
 |----------------------|----------------------|-----------------------------|
