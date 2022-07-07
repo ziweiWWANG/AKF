@@ -11,7 +11,7 @@ Ziwei Wang, Yonhon Ng, Cedric Scheerlinck and Robert Mahony
 
 The paper was accepted by the 2021 IEEE Int. Conf. Computer Vision (ICCV), 2021
 
-[[Paper](https://openaccess.thecvf.com/content/ICCV2021/papers/Wang_An_Asynchronous_Kalman_Filter_for_Hybrid_Event_Cameras_ICCV_2021_paper.pdf)] [[ArXiv](https://arxiv.org/abs/2012.05590)] [[Supplementary Materials] (https://openaccess.thecvf.com/content/ICCV2021/supplemental/Wang_An_Asynchronous_Kalman_ICCV_2021_supplemental.pdf)] [[GitHub](https://github.com/ziweiWWANG/AKF)]
+[[Paper](https://openaccess.thecvf.com/content/ICCV2021/papers/Wang_An_Asynchronous_Kalman_Filter_for_Hybrid_Event_Cameras_ICCV_2021_paper.pdf)] [[ArXiv](https://arxiv.org/abs/2012.05590)] [[Supplementary Materials](https://openaccess.thecvf.com/content/ICCV2021/supplemental/Wang_An_Asynchronous_Kalman_ICCV_2021_supplemental.pdf)] [[GitHub](https://github.com/ziweiWWANG/AKF)]
 
 ## Citation
 If you use or discuss our AKF, please cite our paper as follows:
@@ -35,7 +35,7 @@ There are a few parameters that users can specify:
 
 ### In file [`run_akf.m`](https://github.com/ziweiWWANG/AKF/blob/main/run_akf.m):
 
-|          Variable            | Description | Default Value |
+|          Variables            | Description | Default Value |
 |----------------------|----------------------|-----------------------------|
 | deblur_option  | true for deblur and false for no deblur. Use the deblur option if the input images are blurry. | 1                          |
 | framerate      | the frame rate of the output image sequence in Hz.                    | 300                         |
