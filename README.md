@@ -33,7 +33,7 @@ If you use or discuss our AKF, please cite our paper as follows:
 
 There are a few parameters that users can specify:
 
-### In file [`./run_akf.m`(https://github.com/ziweiWWANG/AKF/blob/main/run_akf.m)]:
+### In file [./run_akf.m(https://github.com/ziweiWWANG/AKF/blob/main/run_akf.m)]:
 
 |          Variable            | Description | Default Value |
 |----------------------|----------------------|-----------------------------|
@@ -56,10 +56,10 @@ Mueggler et al., IJRR 2017.
 Scherlinck et al., ACCV 2018.
 Gehrig et al., ICRA 2021.
 
-If you want to use your datasets, define the post_process method, f_Q, exposure time, contrast threshold (ct) at the beginning of (`./akf_reconstruction.m`)[https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m]. See notes in the next section.
+If you want to use your datasets, define the post_process method, f_Q, exposure time, contrast threshold (ct) at the beginning of (./akf_reconstruction.m)[https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m]. See notes in the next section.
 
-### In file (`akf_reconstruction.m`)[https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m]:
-1. `post_process`: 0 for no normalization, 1 for (image-min/(max-min)), 2 for user-defined maximum and minimum value for extremely bright view, 3 for user-defined maximum and minimum value for extremely dark view. Post-processing methods are important in displaying the reconstructed HDR images since the intensity values can go beyond 0 and 1. Without a proper post-processing method, the details in the HDR part of the image (higher than 1 or lower than 0) can not be displayed. Users can adjust the pre-defined maximum and minimum value in file (`./output_img.m`)[https://github.com/ziweiWWANG/AKF/blob/main/output_img.m] to have the best visualization.
+### In file (akf_reconstruction.m)[https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m]:
+1. `post_process`: 0 for no normalization, 1 for (image-min/(max-min)), 2 for user-defined maximum and minimum value for extremely bright view, 3 for user-defined maximum and minimum value for extremely dark view. Post-processing methods are important in displaying the reconstructed HDR images since the intensity values can go beyond 0 and 1. Without a proper post-processing method, the details in the HDR part of the image (higher than 1 or lower than 0) can not be displayed. Users can adjust the pre-defined maximum and minimum value in file (./output_img.m)[https://github.com/ziweiWWANG/AKF/blob/main/output_img.m] to have the best visualization.
 2. The `f_Q` is the most important parameter for image noise. It represents the inverse of the R_bar function in equation (6) in the paper. You can simply treat it as the image confidence function of intensity. For example, for an image in the range [0 255], the extreme values around 0 and 255 would have lower confidence. The `f_Q` is included in the provided dataset. If you are using your own dataset, you need to tune it carefully.
 3. The preset exposure time for each intensity image is included in the provided datasets (some datasets are recorded with auto-exposure, e.g., interlaken_01a_events_1_150.mat). If you want to use your own dataset, please set or estimate the exposure time as well.
 4. If the exposure time for the intensity images are very short and there is almost no blurry, you can disable the deblur function by setting `deblur_option` = 0. But you still need to define an `exposure` time. 
