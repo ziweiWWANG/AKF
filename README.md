@@ -32,7 +32,7 @@ If you use or discuss our AKF, please cite our paper as follows:
 
 There are a few parameters that users can specify:
 
-### In file [`run_akf.m`](https://github.com/ziweiWWANG/AKF/blob/main/run_akf.m):
+### In file [run_akf.m](https://github.com/ziweiWWANG/AKF/blob/main/run_akf.m):
 
 |          Variables            | Description | Default Value |
 |----------------------|----------------------|-----------------------------|
@@ -55,7 +55,7 @@ Dataset name convention: DatasetName_StartFrame_EndFrame of the original dataset
 [[Scherlinck et al., ACCV 2018]](https://drive.google.com/drive/folders/1Jv73p1-Hi56HXyal4SHQbzs2zywISOvc),
 [[Gehrig et al., ICRA 2021]](https://dsec.ifi.uzh.ch/).
 
-If you want to use your datasets, define `post_process` method, `f_Q`, `exposure`, contrast threshold `ct` at the beginning of [`akf_reconstruction.m`](https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m). See notes in the next section.
+If you want to use your datasets, define `post_process` method, `f_Q`, `exposure`, contrast threshold `ct` at the beginning of [akf_reconstruction.m](https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m). See notes in the next section.
 
 ### In file [akf_reconstruction.m](https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m):
 1. `post_process`: 0 for no normalization, 1 for (image-min/(max-min)), 2 for user-defined maximum and minimum value for extremely bright view, 3 for user-defined maximum and minimum value for extremely dark view. Post-processing methods are important in displaying the reconstructed HDR images since the intensity values can go beyond 0 and 1. Without a proper post-processing method, the details in the HDR part of the image (higher than 1 or lower than 0) can not be displayed. Users can adjust the pre-defined maximum and minimum value in file [output_img.m](https://github.com/ziweiWWANG/AKF/blob/main/output_img.m) to have the best visualization.
