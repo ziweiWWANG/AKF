@@ -36,10 +36,10 @@ There are a few parameters that users can specify:
 
 |          Variables            | Description | Default Value |
 |----------------------|----------------------|-----------------------------|
-| `deblur_option`  | true for deblur and false for no deblur. Use the deblur option if the input images are blurry. | 1                          |
+| `deblur_option`  | 1 for deblur and 0 for no deblur. Use the deblur option if the input images are blurry. | 1                          |
 | `framerate`      | the frame rate of the output image sequence in Hz.                    | 300                         |
 | `use_median_filter`       | a flag of applying a 3-by-3 median filter to the output images.     | 0          |
-| `output_high_frame_rate_flag` | true: output images of the pre-defined framerate, false: output images of the frame intensity framerate. | 0   |
+| `output_high_frame_rate_flag` | 1: output images of the pre-defined framerate, 0: output images of the frame intensity framerate. | 0   |
 | `sigma_p` | the process noise parameter  | 0.0005 |
 | `sigma_i` | the isolated noise parameter | 0.03 |
 | `sigma_r` | the refractory noise parameter | 0.05 |
@@ -68,8 +68,3 @@ If you want to use your datasets, define `post_process` method, `f_Q`, `exposure
 1. Make sure your event and image timestamps are well aligned.
 2. As a nature of the filtering methods, the quality of the reconstruction results is relevant to the quality of event camera datasets. Datasets with obvious noise recorded by hybrid event-frame cameras or lower resolution/sensitivity cameras such as [DAVIS 240](https://inivation.com/wp-content/uploads/2019/08/DAVIS240.pdf) might lead to unsatisfied results in high temporal resolution video reconstruction. The method requires a short time to adapt and converge to the optimal Kalman filter parameters for each dataset.
 3. For academic use only. Should you have any questions or suggestions regarding this code and the corresponding results, please don't hesitate to get in touch with ziwei.wang1@anu.edu.au
-
-
-
-
-
