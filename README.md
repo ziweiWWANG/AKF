@@ -11,10 +11,8 @@ Ziwei Wang, Yonhon Ng, Cedric Scheerlinck and Robert Mahony
 
 The paper was accepted by the 2021 IEEE Int. Conf. Computer Vision (ICCV), 2021
 
-The conference paper PDF is available here:
-https://openaccess.thecvf.com/content/ICCV2021/papers/Wang_An_Asynchronous_Kalman_Filter_for_Hybrid_Event_Cameras_ICCV_2021_paper.pdf
+[[Paper](https://openaccess.thecvf.com/content/ICCV2021/papers/Wang_An_Asynchronous_Kalman_Filter_for_Hybrid_Event_Cameras_ICCV_2021_paper.pdf)] [[ArXiv(https://arxiv.org/abs/2012.05590)]] [[Supplementary Materials] https://openaccess.thecvf.com/content/ICCV2021/supplemental/Wang_An_Asynchronous_Kalman_ICCV_2021_supplemental.pdf] [[GitHub](https://github.com/ziweiWWANG/AKF)]
 
-ArXiv: https://arxiv.org/abs/2012.05590
 ## Citation
 If you use or discuss our AKF, please cite our paper as follows:
 <pre>
@@ -35,18 +33,21 @@ If you use or discuss our AKF, please cite our paper as follows:
 
 There are a few parameters that users can specify:
 
-### In file './run_akf.m':
-1.  'deblur_option', true for deblur and false for no deblur. Use the deblur option if the input images are blurry. 
-2.  'framerate': the frame rate of the output image sequence in Hz.
-3.  'use_median_filter', a flag of applying a 3-by-3 median filter to the output images.
-4.  'output_high_frame_rate_flag': true: output images of the pre-defined framerate, false: output images of the frame intensity framerate.
-5.  'sigma_p': the process noise parameter, default 0.0005.
-6.  'sigma_i': the isolated noise parameter, default 0.03.
-7.  'sigma_r': the refractory noise parameter, default 0.05.
-8.  'refractory_period': the refractory period in microsecond. It models the circuit limitations in each pixel of an event camera limit the response time of events, default 1*10^4.
-9.  'min_ct_scale': the minimal value for the contrast threshold scaling factor, default 0.6.
-10. 'max_ct_scale': the maximal value for the contrast threshold scaling factor, default 100. 
-11. 'p_ini': initial value for state covariance P, default 0.09. 
+### In file `./run_akf.m`:
+
+|                      | Description | Default Value |
+|----------------------|----------------------|-----------------------------|
+| deblur_option  | true for deblur and false for no deblur. Use the deblur option if the input images are blurry. | 1                          |
+| framerate      | the frame rate of the output image sequence in Hz.                    | 300                         |
+| use_median_filter       | a flag of applying a 3-by-3 median filter to the output images.     | 0          |
+| output_high_frame_rate_flag | true: output images of the pre-defined framerate, false: output images of the frame intensity framerate. | 0   |
+| sigma_p | the process noise parameter  | 0.0005 |
+| sigma_i | the isolated noise parameter | 0.03 |
+| sigma_r | the refractory noise parameter | default 0.05 |
+| refractory_period | the refractory period in microsecond. It models the circuit limitations in each pixel of an event camera limit the response time of events| 1*10^4|
+|min_ct_scale|  the minimal value for the contrast threshold scaling factor | 0.6|
+|max_ct_scale|  the maximal value for the contrast threshold scaling factor | 100| 
+|p_ini | initial value for state covariance P | 0.09|
 
 ### [Click Here To Download Example Datasets](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/Epc5ULLIIENAsDtNYycTdp4BtfG8Sn2ImaL44h_qhvf2jw?e=aRIV29)
 Download the datasets and save them in folder './data'.
