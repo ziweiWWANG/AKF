@@ -5,7 +5,6 @@
   </a>
 </p>
 
-## For academic use only
 
 Ziwei Wang, Yonhon Ng, Cedric Scheerlinck and Robert Mahony
 
@@ -68,7 +67,7 @@ If you want to use your datasets, define `post_process` method, `f_Q`, `exposure
 ### Notes
 1. Make sure your event and image timestamps are well aligned.
 2. As a nature of the filtering methods, the quality of the reconstruction results is relevant to the quality of event camera datasets. Datasets with obvious noise recorded by hybrid event-frame cameras or lower resolution/sensitivity cameras such as [`DAVIS 240`](https://inivation.com/wp-content/uploads/2019/08/DAVIS240.pdf) might lead to unsatisfied results in high temporal resolution video reconstruction. The method requires a short time to adapt and converge to the optimal Kalman filter parameters for each dataset.
-3. Should you have any questions or suggestions regarding this code and the corresponding results, please don't hesitate to get in touch with ziwei.wang1@anu.edu.au
+3. For academic use only. Should you have any questions or suggestions regarding this code and the corresponding results, please don't hesitate to get in touch with ziwei.wang1@anu.edu.au
 
 
 
