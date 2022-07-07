@@ -36,10 +36,10 @@ There are a few parameters that users can specify:
 
 |          Variables            | Description | Default Value |
 |----------------------|----------------------|-----------------------------|
-| `deblur_option`  | 1 for deblur and 0 for no deblur. Use the deblur option if the input images are blurry. | 1                          |
-| `framerate`      | the frame rate of the output image sequence in Hz.                    | 300                         |
-| `use_median_filter`       | a flag of applying a 3-by-3 median filter to the output images.     | 0          |
-| `output_high_frame_rate_flag` | 1: output images of the pre-defined framerate, 0: output images of the frame intensity framerate. | 0   |
+| `deblur_option`  | 1: deblur, 0: no deblur. Use the deblur option if the input images are blurry | 1                          |
+| `framerate`      | the frame rate of the output image sequence in Hz                    | 300                         |
+| `use_median_filter`       | a flag of applying a 3-by-3 median filter to the output images     | 0          |
+| `output_high_frame_rate_flag` | 1: output images of the pre-defined framerate, 0: output images of the frame intensity framerat. | 0   |
 | `sigma_p` | the process noise parameter  | 0.0005 |
 | `sigma_i` | the isolated noise parameter | 0.03 |
 | `sigma_r` | the refractory noise parameter | 0.05 |
