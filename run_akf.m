@@ -2,8 +2,9 @@ clear
 close all
 
 %% Dataset
-% you can download example datasets: city_09d_150_200, boxes_6dof_500_800, 
-% night_drive, interlaken_01a_1_150. 
+% you can download example datasets: 
+% public dataset: city_09d_150_200, boxes_6dof_500_800, night_drive, interlaken_01a_1_150.
+% our HDR dataset: carpark1, carpark2, tree1, tree2, tree3, city.
 % or you can process and use your own dataset
 DataName = 'city_09d_150_200';  
 

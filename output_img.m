@@ -1,4 +1,4 @@
-function output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,height,width,folder,P,log_intensity_state_)
+function output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,height,width,folder,P,log_intensity_state_,exposure)
     td_img = exp(log_intensity_state_) - safety_offset;        
     if use_median_filter
         td_img = medfilt2(td_img,[3,3]);
@@ -32,6 +32,11 @@ function output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offs
         intensity_lower_bound = -0.001;
         intensity_upper_bound = 0.4;
         td_img = (td_img - intensity_lower_bound) / (intensity_upper_bound - intensity_lower_bound);
+    elseif post_process == 4 % use histogram equalization for display
+        % save raw output without any post-processing for evalution
+        save(sprintf([folder '/image_' num2str(img_idx_now) '.mat']), 'td_img');
+        % adaptive histogram equalization for display only
+        td_img = adapthisteq(td_img);
     end       
     
     %% write images

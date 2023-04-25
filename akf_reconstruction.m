@@ -133,7 +133,7 @@ function akf_reconstruction(DataName, deblur_option, ...
                 ts_array_(:) = ts;
                 
                 % output images and timestamps
-                output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,height,width,folder,P,log_intensity_state_)
+                output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,height,width,folder,P,log_intensity_state_,exposure)
                 output_img_ts = time_image(img_idx_now) / 1e6;
                 output_img_ts = sprintf('%0.9f',output_img_ts);
                 outputIdxTs = sprintf(['image_' num2str(img_idx_now) '.png ' num2str(output_img_ts) '\n']);
@@ -157,7 +157,7 @@ function akf_reconstruction(DataName, deblur_option, ...
             ts_array_(:) = ts;
             
             % output images and timestamps
-            output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,height,width,folder,P,log_intensity_state_)
+            output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,height,width,folder,P,log_intensity_state_,exposure)
             output_img_ts = time_image(img_idx_now) / 1e6;
             output_img_ts = sprintf('%0.9f',output_img_ts);
             outputIdxTs = sprintf(['image_' num2str(img_idx_now) '.png ' num2str(output_img_ts) '\n']);

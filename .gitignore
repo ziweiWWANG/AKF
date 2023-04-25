@@ -1,0 +1,6 @@
+# dataset folder
+data/*
+# reconstruction folder
+reconstruction/*
+# others
+*.m~
