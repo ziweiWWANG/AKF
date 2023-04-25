@@ -54,7 +54,7 @@ Dataset name convention: DatasetName_StartFrame_EndFrame of the original dataset
 [[Scherlinck et al., ACCV 2018]](https://drive.google.com/drive/folders/1Jv73p1-Hi56HXyal4SHQbzs2zywISOvc),
 [[Gehrig et al., ICRA 2021]](https://dsec.ifi.uzh.ch/).
 
-### [Click Here To Download Our HDR Event Dataset](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/EnruCV7YMuhGnL1AFcO78S8BXCeLrTde6TE0iwE8hLyUoA?e=vB1uAi)
+### [Click Here To Download Our HDR Hybrid Event/Frame Dataset](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/EnruCV7YMuhGnL1AFcO78S8BXCeLrTde6TE0iwE8hLyUoA?e=vB1uAi)
 
 Download the datasets and save them in folder `data/`.
 If you want to use your datasets, define `post_process` method, `f_Q`, `exposure`, contrast threshold `ct` at the beginning of [akf_reconstruction.m](https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m). See notes in the next section.
