@@ -1,6 +1,6 @@
-function output_deblur_1_log = deblur_edge_left(width,height,min_ct_scale,max_ct_scale,sigma,img_idx_now,time_image,exposure,events,image,c_deblur,safety_offset)
-    output_deblur_1 = deblur_mid(width,height,min_ct_scale,max_ct_scale,sigma,img_idx_now,time_image,exposure,events,image,c_deblur,safety_offset);
-    output_deblur_1_log = log(output_deblur_1+1);
+function output_deblur_1_log = deblur_edge_left(min_ct_scale,max_ct_scale,img_idx_now,time_image,exposure,events,image,c_deblur,safety_offset)
+    output_deblur_1 = deblur_mid(min_ct_scale,max_ct_scale,img_idx_now,time_image(img_idx_now),exposure,events,image,c_deblur,safety_offset);
+    output_deblur_1_log = log(output_deblur_1 + safety_offset);
     t1 = events(img_idx_now,1) - exposure/2;
     t2 = events(img_idx_now,1); 
     e_start_idx = find(events(:,1) >= t1,1,'first');

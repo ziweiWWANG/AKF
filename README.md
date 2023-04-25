@@ -39,7 +39,7 @@ There are a few parameters that users can specify:
 | `deblur_option`  | 1: deblur, 0: no deblur. Use the deblur option if the input images are blurry | 1                          |
 | `framerate`      | the frame rate of the output image sequence in Hz                    | 300                         |
 | `use_median_filter`       | a flag of applying a 3-by-3 median filter to the output images     | 0          |
-| `output_high_frame_rate_flag` | 1: output images of the pre-defined framerate, 0: output images of the frame intensity framerat. | 0   |
+| `output_high_frame_rate_flag` | 1: output images of the pre-defined framerate, 0: output images of the frame intensity framerat. | 1   |
 | `sigma_p` | the process noise parameter  | 0.0005 |
 | `sigma_i` | the isolated noise parameter | 0.03 |
 | `sigma_r` | the refractory noise parameter | 0.05 |
@@ -49,12 +49,14 @@ There are a few parameters that users can specify:
 |`p_ini` | initial value for state covariance P | 0.09|
 
 ### [Click Here To Download Example Datasets](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/Epc5ULLIIENAsDtNYycTdp4BtfG8Sn2ImaL44h_qhvf2jw?e=aRIV29)
-Download the datasets and save them in folder `data/`.
 Dataset name convention: DatasetName_StartFrame_EndFrame of the original dataset (we only keep the fast motion part or highly HDR part in the sample datasets. You can download the whole dataset sequence from the website of the following papers, and test if you like). The example datasets are publicly available datasets from:
 [[Mueggler et al., IJRR 2017]](https://rpg.ifi.uzh.ch/davis_data.html),
 [[Scherlinck et al., ACCV 2018]](https://drive.google.com/drive/folders/1Jv73p1-Hi56HXyal4SHQbzs2zywISOvc),
 [[Gehrig et al., ICRA 2021]](https://dsec.ifi.uzh.ch/).
 
+### [Click Here To Download Our HDR Event Dataset](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/EnruCV7YMuhGnL1AFcO78S8BXCeLrTde6TE0iwE8hLyUoA?e=vB1uAi)
+
+Download the datasets and save them in folder `data/`.
 If you want to use your datasets, define `post_process` method, `f_Q`, `exposure`, contrast threshold `ct` at the beginning of [akf_reconstruction.m](https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m). See notes in the next section.
 
 ### In file [akf_reconstruction.m](https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m):

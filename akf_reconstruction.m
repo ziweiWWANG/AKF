@@ -87,7 +87,7 @@ function akf_reconstruction(DataName, deblur_option, ...
     log_deblur_image_now(:,:,1) = log(double(output_deblur_t1) + safety_offset);
     log_deblur_image_now(:,:,2) = log(double(output_deblur_t2) + safety_offset);
     log_intensity_state_ = log_deblur_image_now(:,:,1);
-    ct_scale = compute_ct_scale(width,height,ct,exposure,log_deblur_image_now,time_image,events,img_idx_now);   
+    ct_scale = compute_ct_scale(ct,exposure,log_deblur_image_now,time_image,events,img_idx_now);   
     % assume forwards and backbards interpolation are the same at the begining
     log_output_interp_t1 = log_deblur_image_now(:,:,1);
     log_output_interp_t2 = log_output_interp_t1;   
@@ -95,8 +95,8 @@ function akf_reconstruction(DataName, deblur_option, ...
     %% event Update 
     for i=e_start_idx:e_end_idx
         ts = events(i,1);          % microsecond
-        x = events(i,2);           % [1 -> width]
-        y = events(i,3);           % [1 -> height]
+        x = events(i,2);           
+        y = events(i,3);           
         polarity = events(i,4);    % [-1, 1]
         
         %% update raw image & deblur image & ct_scale
@@ -105,7 +105,7 @@ function akf_reconstruction(DataName, deblur_option, ...
         %% need deblur => update reference image inside exposure time    
         elseif deblur_option && (ts > img_now_ts_1) && (ts <= img_now_ts_2)
             if new_frame_f
-                output_deblur_1_log = deblur_edge_left(width,height,min_ct_scale,max_ct_scale,ct_scale,img_idx_now,time_image,exposure(img_idx_now),events,image,ct,safety_offset); 
+                output_deblur_1_log = deblur_edge_left(min_ct_scale,max_ct_scale,img_idx_now,time_image,exposure(img_idx_now),events,image,ct,safety_offset); 
                 log_intensity_now_ = output_deblur_1_log;
                 new_frame_f = 0;
             else
@@ -133,7 +133,7 @@ function akf_reconstruction(DataName, deblur_option, ...
                 ts_array_(:) = ts;
                 
                 % output images and timestamps
-                output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,height,width,folder,P,log_intensity_state_,exposure)
+                output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,folder,P,log_intensity_state_)
                 output_img_ts = time_image(img_idx_now) / 1e6;
                 output_img_ts = sprintf('%0.9f',output_img_ts);
                 outputIdxTs = sprintf(['image_' num2str(img_idx_now) '.png ' num2str(output_img_ts) '\n']);
@@ -157,7 +157,7 @@ function akf_reconstruction(DataName, deblur_option, ...
             ts_array_(:) = ts;
             
             % output images and timestamps
-            output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,height,width,folder,P,log_intensity_state_,exposure)
+            output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,folder,P,log_intensity_state_)
             output_img_ts = time_image(img_idx_now) / 1e6;
             output_img_ts = sprintf('%0.9f',output_img_ts);
             outputIdxTs = sprintf(['image_' num2str(img_idx_now) '.png ' num2str(output_img_ts) '\n']);
@@ -178,7 +178,7 @@ function akf_reconstruction(DataName, deblur_option, ...
 
             % deblur the first and the second image
             if deblur_option
-                [output_deblur_t1,output_deblur_t2] = deblur_edge_outer(width,height,min_ct_scale,max_ct_scale,ct_scale,img_idx_now,time_image,exposure(img_idx_now),events,image,ct,safety_offset);        
+                [output_deblur_t1,output_deblur_t2] = deblur_edge_outer(min_ct_scale,max_ct_scale,img_idx_now,time_image,exposure(img_idx_now),events,image,ct,safety_offset);        
             else
                 output_deblur_t1 = double(image(:,:,img_idx_now))/255;
                 output_deblur_t2 = double(image(:,:,img_idx_now + safety_offset))/255;
@@ -187,7 +187,7 @@ function akf_reconstruction(DataName, deblur_option, ...
             log_deblur_image_now(:,:,2) = log(double(output_deblur_t2) + safety_offset);          
             
             % update ct_scale between the first and the second image
-            ct_scale = compute_ct_scale(width,height,ct,exposure,log_deblur_image_now,time_image,events,img_idx_now);      
+            ct_scale = compute_ct_scale(ct,exposure,log_deblur_image_now,time_image,events,img_idx_now);      
 
             % update parameters for interpolation forward -- current time: time_image(img_idx_now) 
             log_output_interp_t1 = log_deblur_image_now(:,:,1);
@@ -302,24 +302,7 @@ function akf_reconstruction(DataName, deblur_option, ...
             
             %% high frequency image output          
             if output_high_frame_rate_flag
-                td_img = exp(log_intensity_state_) - safety_offset;
-                if use_median_filter
-                    td_img = medfilt2(td_img,[3,3]);
-                end
-                for ii = 1:height
-                    for jj = 1:width
-                        if (P(ii,jj)) > 100 || isnan(P(ii,jj))
-                           P(ii,jj) = 0.25;
-                           td_img(ii,jj) = exp(log_intensity_now_(ii,jj))-safety_offset;
-                        elseif (P(ii,jj)) < 0 
-                            P(ii,jj) = 0;
-                        end
-                    end
-                end
-                td_img(td_img>10) = NaN;
-                td_img(td_img<-10) = NaN;
-                td_img(isnan(td_img)) = exp(log_intensity_now_(isnan(td_img))) - safety_offset;
-                output_hfr_img(frame_idx,td_img,post_process,high_frame_rate_folder);   
+                output_img(log_intensity_now_,frame_idx,use_median_filter,safety_offset,post_process,high_frame_rate_folder,P,log_intensity_state_)
                 frame_idx = frame_idx + 1;
             end            
             ts_array_(:) = ts;

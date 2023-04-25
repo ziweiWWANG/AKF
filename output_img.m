@@ -1,22 +1,21 @@
-function output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,height,width,folder,P,log_intensity_state_,exposure)
+function output_img(log_intensity_now_,img_idx_now,use_median_filter,safety_offset,post_process,folder,P,log_intensity_state_)
     td_img = exp(log_intensity_state_) - safety_offset;        
     if use_median_filter
         td_img = medfilt2(td_img,[3,3]);
     end
 
-    for ii = 1:height
-        for jj = 1:width
+    for ii = 1:size(td_img,1)
+        for jj = 1:size(td_img,2)
             if (P(ii,jj)) > 100 || isnan(P(ii,jj))
                P(ii,jj) = 0.25;
-               td_img(ii,jj) = exp(log_intensity_now_(ii,jj))-1;
+               td_img(ii,jj) = exp(log_intensity_now_(ii,jj)) - safety_offset;
             elseif (P(ii,jj)) < 0 
                 P(ii,jj) = 0;
             end
         end
     end
-    td_img(td_img>3) = NaN;
-    td_img(td_img<-3) = NaN; 
-    td_img(isnan(td_img)) = exp(log_intensity_now_(isnan(td_img))) - 1;
+    td_img((td_img>3) | (td_img<-3)) = NaN;
+    td_img(isnan(td_img)) = exp(log_intensity_now_(isnan(td_img))) - safety_offset;
 
     %% post process
     if post_process == 1

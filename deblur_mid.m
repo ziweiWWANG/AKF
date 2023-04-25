@@ -1,15 +1,16 @@
-function [output_deblur_now] = deblur_mid(width,height,min_ct_scale,max_ct_scale,ct_scale,frame,time_image,exposure,events,image,c_deblur,safety_offset)
-    ct_scale = ones(480,640); % don't consider ct scale in deblur
+function [output_deblur_now] = deblur_mid(min_ct_scale,max_ct_scale,frame,time_image,exposure,events,image,c_deblur,safety_offset)
+    height = size(image,1);
+    width = size(image,2);
+    ct_scale = ones(height,width); % don't consider ct scale in deblur
     delta_t = zeros(height,width);
-    % frame 1
     if numel(exposure) == 1
-        t1 = time_image(frame) - exposure/2;
-        t2 = time_image(frame);
-        t3 = time_image(frame) + exposure/2;
+        t1 = time_image - exposure/2;
+        t2 = time_image;
+        t3 = time_image + exposure/2;
     else
-        t1 = time_image(frame) - exposure(frame)/2;
-        t2 = time_image(frame);
-        t3 = time_image(frame) + exposure(frame)/2;
+        t1 = time_image - exposure(frame)/2;
+        t2 = time_image;
+        t3 = time_image + exposure(frame)/2;
     end
     e_start_idx = find(events(:,1) >= t1,1,'first');
     e_mid_idx = find(events(:,1) >= t2,1,'first');

@@ -1,6 +1,6 @@
-function [output_deblur_t1,output_deblur_t2] = deblur_edge_outer(width,height,min_ct_scale,max_ct_scale,ct_scale,img_idx_now,time_image,exposure,events,image,c_deblur,safety_offset)
+function [output_deblur_t1,output_deblur_t2] = deblur_edge_outer(min_ct_scale,max_ct_scale,img_idx_now,time_image,exposure,events,image,c_deblur,safety_offset)
     %% outer edge deblur frame 1
-    output_deblur_on_1 = deblur_mid(width,height,min_ct_scale,max_ct_scale,ct_scale,img_idx_now,time_image,exposure,events,image,c_deblur,safety_offset);
+    output_deblur_on_1 = deblur_mid(min_ct_scale,max_ct_scale,img_idx_now,time_image(img_idx_now),exposure,events,image,c_deblur,safety_offset);
     output_deblur_1_log = log(output_deblur_on_1+1); % add safety_offset 1
     t1 = time_image(img_idx_now) - exposure/2;
     t2 = time_image(img_idx_now);
@@ -18,10 +18,10 @@ function [output_deblur_t1,output_deblur_t2] = deblur_edge_outer(width,height,mi
         end
         output_deblur_1_log(ye,xe) = output_deblur_1_log(ye,xe) - contrast_threshold_e;
     end
-    output_deblur_t1 = exp(output_deblur_1_log)-1;
+    output_deblur_t1 = exp(output_deblur_1_log)-safety_offset;
 
     %% outer edge deblur frame 2
-    output_deblur_on_2 = deblur_mid(width,height,min_ct_scale,max_ct_scale,ct_scale,img_idx_now+1,time_image,exposure,events,image,c_deblur,safety_offset);
+    output_deblur_on_2 = deblur_mid(min_ct_scale,max_ct_scale,img_idx_now+1,time_image(img_idx_now+1),exposure,events,image,c_deblur,safety_offset);
     output_deblur_2_log = log(output_deblur_on_2+1);
     t1 = time_image(img_idx_now+1);
     t2 = time_image(img_idx_now+1) + exposure/2;
@@ -39,5 +39,5 @@ function [output_deblur_t1,output_deblur_t2] = deblur_edge_outer(width,height,mi
         end
         output_deblur_2_log(ye,xe) = output_deblur_2_log(ye,xe) + contrast_threshold_e;
     end
-    output_deblur_t2 = exp(output_deblur_2_log)-1;
+    output_deblur_t2 = exp(output_deblur_2_log)-safety_offset;
 end
