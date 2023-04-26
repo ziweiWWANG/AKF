@@ -48,6 +48,16 @@ There are a few parameters that users can specify:
 |`max_ct_scale`|  the maximal value for the contrast threshold scaling factor | 100| 
 |`p_ini` | initial value for state covariance P | 0.09|
 
+### In file [akf_reconstruction.m](https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m):
+1. `post_process`: 0 for no normalization; 1 for (image-min/(max-min)); 2 for user-defined maximum and minimum value for extremely bright view; 3 for user-defined maximum and minimum value for extremely dark view. Post-processing methods are important in displaying the reconstructed HDR images since the intensity values can go beyond 0 and 1; 4 for contrast-limited adaptive histogram equalization (using matlab inbuilt function `adapthisteq()`). Without a proper post-processing method, the details in the HDR part of the image (higher than 1 or lower than 0) can not be displayed. Users can adjust the pre-defined maximum and minimum value in file [output_img.m](https://github.com/ziweiWWANG/AKF/blob/main/output_img.m) to have the best visualization.
+2. The `f_Q` is the most important parameter for image noise. It represents the inverse of the `R_bar` function in `equation (6)` in the paper. You can simply treat it as the image confidence function of intensity. For example, for an image in the range [0 255], the extreme values around 0 and 255 would have lower confidence. The `f_Q` is included in the provided dataset. If you are using your own dataset, you need to tune it carefully.
+3. The preset exposure time for each intensity image is included in the provided datasets (some datasets are recorded with auto-exposure, e.g., [interlaken_01a_events_1_150.mat](https://anu365-my.sharepoint.com/personal/u6456661_anu_edu_au/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fu6456661%5Fanu%5Fedu%5Fau%2FDocuments%2Fresearch%2Ficcv2021%2Fdata&ga=1)). If you want to use your own dataset, please set or estimate the exposure time as well.
+4. If the exposure time for the intensity images are very short and there is almost no blurry, you can disable the deblur function by setting `deblur_option = 0`. But you still need to define an `exposure` time. 
+
+## Datasets
+Download the datasets and save them in folder `data/`.
+If you want to use your datasets, define `post_process` method, `f_Q`, `exposure`, contrast threshold `ct` at the beginning of [akf_reconstruction.m](https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m). See notes in the next section.
+
 ### [Click Here To Download Example Datasets](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/Epc5ULLIIENAsDtNYycTdp4BtfG8Sn2ImaL44h_qhvf2jw?e=aRIV29)
 Dataset name convention: DatasetName_StartFrame_EndFrame of the original dataset (we only keep the fast motion part or highly HDR part in the sample datasets. You can download the whole dataset sequence from the website of the following papers, and test if you like). The example datasets are publicly available datasets from:
 [[Mueggler et al., IJRR 2017]](https://rpg.ifi.uzh.ch/davis_data.html),
@@ -55,15 +65,11 @@ Dataset name convention: DatasetName_StartFrame_EndFrame of the original dataset
 [[Gehrig et al., ICRA 2021]](https://dsec.ifi.uzh.ch/).
 
 ### [Click Here To Download Our HDR Hybrid Event/Frame Dataset](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/EnruCV7YMuhGnL1AFcO78S8BXCeLrTde6TE0iwE8hLyUoA?e=vB1uAi)
-
-Download the datasets and save them in folder `data/`.
-If you want to use your datasets, define `post_process` method, `f_Q`, `exposure`, contrast threshold `ct` at the beginning of [akf_reconstruction.m](https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m). See notes in the next section.
-
-### In file [akf_reconstruction.m](https://github.com/ziweiWWANG/AKF/blob/main/akf_reconstruction.m):
-1. `post_process`: 0 for no normalization; 1 for (image-min/(max-min)); 2 for user-defined maximum and minimum value for extremely bright view; 3 for user-defined maximum and minimum value for extremely dark view. Post-processing methods are important in displaying the reconstructed HDR images since the intensity values can go beyond 0 and 1; 4 for contrast-limited adaptive histogram equalization (using matlab inbuilt function `adapthisteq()`). Without a proper post-processing method, the details in the HDR part of the image (higher than 1 or lower than 0) can not be displayed. Users can adjust the pre-defined maximum and minimum value in file [output_img.m](https://github.com/ziweiWWANG/AKF/blob/main/output_img.m) to have the best visualization.
-2. The `f_Q` is the most important parameter for image noise. It represents the inverse of the `R_bar` function in `equation (6)` in the paper. You can simply treat it as the image confidence function of intensity. For example, for an image in the range [0 255], the extreme values around 0 and 255 would have lower confidence. The `f_Q` is included in the provided dataset. If you are using your own dataset, you need to tune it carefully.
-3. The preset exposure time for each intensity image is included in the provided datasets (some datasets are recorded with auto-exposure, e.g., [interlaken_01a_events_1_150.mat](https://anu365-my.sharepoint.com/personal/u6456661_anu_edu_au/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fu6456661%5Fanu%5Fedu%5Fau%2FDocuments%2Fresearch%2Ficcv2021%2Fdata&ga=1)). If you want to use your own dataset, please set or estimate the exposure time as well.
-4. If the exposure time for the intensity images are very short and there is almost no blurry, you can disable the deblur function by setting `deblur_option = 0`. But you still need to define an `exposure` time. 
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=XPz7laloKws">
+    <img src="figures/hdr-dataset.png" alt="Our HDR Hybrid Event-Frame Dataset" width="500"/>
+  </a>
+</p>
 
 
 ### Notes
