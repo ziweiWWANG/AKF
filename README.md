@@ -65,11 +65,13 @@ Dataset name convention: DatasetName_StartFrame_EndFrame of the original dataset
 [[Gehrig et al., ICRA 2021]](https://dsec.ifi.uzh.ch/).
 
 ### [Click Here To Download Our HDR Hybrid Event/Frame Dataset](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/EnruCV7YMuhGnL1AFcO78S8BXCeLrTde6TE0iwE8hLyUoA?e=vB1uAi)
+Selected Images from Our HDR Hybrid Event-Frame Dataset:
 <p align="center">
   <a href="https://www.youtube.com/watch?v=XPz7laloKws">
-    <img src="figures/hdr-dataset.png" alt="Our HDR Hybrid Event-Frame Dataset" width="500"/>
+    <img src="figures/hdr-dataset.png" alt="Our HDR Hybrid Event-Frame Dataset" width="900"/>
   </a>
 </p>
+First row shows the low dynamic range frames and the second row shows the high dynamic range ground truth (with tone-mapping for display only).
 
 
 ### Notes
