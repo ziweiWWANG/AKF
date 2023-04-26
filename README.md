@@ -64,7 +64,7 @@ Dataset name convention: DatasetName_StartFrame_EndFrame of the original dataset
 [[Scherlinck et al., ACCV 2018]](https://drive.google.com/drive/folders/1Jv73p1-Hi56HXyal4SHQbzs2zywISOvc),
 [[Gehrig et al., ICRA 2021]](https://dsec.ifi.uzh.ch/).
 
-### [Click Here To Download Our HDR Hybrid Event/Frame Dataset](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/EnruCV7YMuhGnL1AFcO78S8BXCeLrTde6TE0iwE8hLyUoA?e=vB1uAi)
+### Our HDR Hybrid Event-Frame Dataset
 Selected Images from Our HDR Hybrid Event-Frame Dataset:
 <p align="center">
   <a href="https://www.youtube.com/watch?v=XPz7laloKws">
@@ -72,6 +72,13 @@ Selected Images from Our HDR Hybrid Event-Frame Dataset:
   </a>
 </p>
 First row shows the low dynamic range frames and the second row shows the high dynamic range ground truth (with tone-mapping for display only).
+
+#### [Click Here To Download Raw Data](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/EnruCV7YMuhGnL1AFcO78S8BXCeLrTde6TE0iwE8hLyUoA?e=vB1uAi)
+Raw data includes raw events, HDR ground truth images, LDR images, exposure time, etc. This can be directly used for AKF.
+
+#### [Click Here To Download Event and Frame Pairs](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/Ekerd_x6OAZLicEoYUIZpsEBocx1EOo4j8kPnu8KNKMlVg?e=k4dCKs)
+For some methods which require event reconstruction and frame pairs, we provide reconstructed event data using the E2VID event reconstruction algorithm [[Rebecq et al., TPAMI 2019]](https://github.com/uzh-rpg/rpg_e2vid).
+
 
 
 ### Notes
