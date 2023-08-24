@@ -73,10 +73,10 @@ Selected Images from Our HDR Hybrid Event-Frame Dataset:
 </p>
 First row shows the low dynamic range frames and the second row shows the high dynamic range ground truth (with tone-mapping for display only).
 
-#### [Click Here To Download Raw Data](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/EnruCV7YMuhGnL1AFcO78S8BXCeLrTde6TE0iwE8hLyUoA?e=vB1uAi)
+#### [Click Here To Download Raw Data](https://drive.google.com/drive/folders/1JYdvY2GqgD3RC-rczgf8t1JoIuBqoJvp?usp=sharing)
 Raw data includes raw events, HDR ground truth images, LDR images, exposure time, etc. This can be directly used for AKF.
 
-#### [Click Here To Download Event and Frame Pairs](https://anu365-my.sharepoint.com/:f:/g/personal/u6456661_anu_edu_au/Ekerd_x6OAZLicEoYUIZpsEBocx1EOo4j8kPnu8KNKMlVg?e=k4dCKs)
+#### [Click Here To Download Event and Frame Pairs](https://drive.google.com/drive/folders/1fH7TurmZ68WQunNP4RfTUeeMOiD7RGfX?usp=sharing)
 For some methods which require event reconstruction and frame pairs, we provide reconstructed event data using the E2VID event reconstruction algorithm [[Rebecq et al., TPAMI 2019]](https://github.com/uzh-rpg/rpg_e2vid).
 
 
