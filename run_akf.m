@@ -19,7 +19,7 @@ use_median_filter = false;
 % output_high_frame_rate_flag: 
 % true: output images of the pre-defined framerate, 
 % false: output images of the frame intensity framerate
-output_high_frame_rate_flag = true; 
+output_high_frame_rate_flag = false; 
 % sigma_p: the process noise parameter
 sigma_p = 0.005; 
 % sigma_i: the isolated noise parameter

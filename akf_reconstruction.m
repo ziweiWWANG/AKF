@@ -53,12 +53,12 @@ function akf_reconstruction(DataName, deblur_option, ...
     load(load_data_add);
     %% initialization
     [ts_array_,ts_array_2,frame_idx,R_inv_array,C,weight]...
-        = initialization(height, width);
+        = initialization(im_height, im_width);
     frame_time = floor(1/framerate * 1e6);
     frame_start = 2;
     frame_end =  length(time_image); 
     safety_offset = 1;
-    P = zeros(height,width) + p_ini; 
+    P = zeros(im_height,im_width) + p_ini; 
     new_frame_f = 1;
     write_output_f = 0;
     img_idx_now = frame_start;
@@ -234,11 +234,11 @@ function akf_reconstruction(DataName, deblur_option, ...
         C(y,x) = (log_intensity_state_(y,x) - log_intensity_now) ./ P(y,x);
         log_intensity_state_(y,x) = (1 ./ (1 ./ P(y,x) + R_inv_array(y,x) .* delta_t)) .* C(y,x) + log_intensity_now;
         log_intensity_state_(y,x) = log_intensity_state_(y,x) + contrast_threshold;   
-        if x > 1 && x < width && y > 1 && y < height && ((ts - ts_array_2(y,x)) > refractory_period)
+        if x > 1 && x < im_width && y > 1 && y < im_height && ((ts - ts_array_2(y,x)) > refractory_period)
             ts_neig = ts_array_2(y-1:y+1,x-1:x+1);
             Q_i = sigma_i * min(ts - ts_neig(:))/1e6; % in second, depends on neighbour pixels
             Q_r = 0;
-        elseif x > 1 && x < width && y > 1 && y < height && ((ts - ts_array_2(y,x)) <= refractory_period)
+        elseif x > 1 && x < im_width && y > 1 && y < im_height && ((ts - ts_array_2(y,x)) <= refractory_period)
             ts_neig = ts_array_2(y-1:y+1,x-1:x+1);
             Q_i = sigma_i * min(ts - ts_neig(:))/1e6; % in second, depends on neighbour pixels
             Q_r = sigma_r * min(ts - ts_array_2(y,x))/1e6;
