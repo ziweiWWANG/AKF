@@ -83,12 +83,12 @@ function akf_reconstruction(DataName, deblur_option, ...
     end
     t_next_publish_ = time_image(frame_start)+exposure(img_idx_now)/2;
     output_deblur_t1 = double(image(:,:,frame_start))/255;
-    output_deblur_t2 = double(image(:,:,frame_start+safety_offset))/255;
+    output_deblur_t2 = double(image(:,:,frame_start+1))/255;
     log_deblur_image_now(:,:,1) = log(double(output_deblur_t1) + safety_offset);
     log_deblur_image_now(:,:,2) = log(double(output_deblur_t2) + safety_offset);
     log_intensity_state_ = log_deblur_image_now(:,:,1);
     ct_scale = compute_ct_scale(ct,exposure,log_deblur_image_now,time_image,events,img_idx_now);   
-    % assume forwards and backbards interpolation are the same at the begining
+    % assume forwards and backbards interpolation are the same at the beginning
     log_output_interp_t1 = log_deblur_image_now(:,:,1);
     log_output_interp_t2 = log_output_interp_t1;   
     
@@ -173,15 +173,15 @@ function akf_reconstruction(DataName, deblur_option, ...
             img_now_ts_1 = time_image(img_idx_now) - exposure(img_idx_now)/2;
             img_now_ts_mid = time_image(img_idx_now);
             img_now_ts_2 = time_image(img_idx_now) + exposure(img_idx_now)/2;
-            img_next_ts_1 = time_image(img_idx_now + safety_offset) - exposure(img_idx_now)/2;
-            img_next_ts_2 = time_image(img_idx_now + safety_offset) + exposure(img_idx_now)/2;
+            img_next_ts_1 = time_image(img_idx_now + 1) - exposure(img_idx_now)/2;
+            img_next_ts_2 = time_image(img_idx_now + 1) + exposure(img_idx_now)/2;
 
             % deblur the first and the second image
             if deblur_option
                 [output_deblur_t1,output_deblur_t2] = deblur_edge_outer(min_ct_scale,max_ct_scale,img_idx_now,time_image,exposure(img_idx_now),events,image,ct,safety_offset);        
             else
                 output_deblur_t1 = double(image(:,:,img_idx_now))/255;
-                output_deblur_t2 = double(image(:,:,img_idx_now + safety_offset))/255;
+                output_deblur_t2 = double(image(:,:,img_idx_now+1))/255;
             end
             log_deblur_image_now(:,:,1) = log(double(output_deblur_t1) + safety_offset);
             log_deblur_image_now(:,:,2) = log(double(output_deblur_t2) + safety_offset);          
