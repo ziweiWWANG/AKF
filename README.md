@@ -1,3 +1,9 @@
+Please check out our more recent [Event-Asynchronous-Filter](https://github.com/ziweiWWANG/Event-Asynchronous-Filter) (TPAMI 2023) in the same line of work.
+
+The [Event-based Complementary Filter](https://github.com/cedric-scheerlinck/dvs_image_reconstruction) is integrated into a unified pipeline.
+
+
+
 # An Asynchronous Kalman Filter for Hybrid Event Cameras
 <p align="center">
   <a href="https://www.youtube.com/watch?v=XPz7laloKws">
