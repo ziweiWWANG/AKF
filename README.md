@@ -21,14 +21,22 @@ The paper was accepted by the 2021 IEEE Int. Conf. Computer Vision (ICCV), 2021
 ## Citation
 If you use or discuss our AKF, please cite our paper as follows:
 <pre>
+@inproceedings{wang2021asynchronous,
+  title={An asynchronous kalman filter for hybrid event cameras},
+  author={Wang, Ziwei and Ng, Yonhon and Scheerlinck, Cedric and Mahony, Robert},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={448--457},
+  year={2021}
+}
+</pre>
 
-@InProceedings{Wang_2021_ICCV,
-    author    = {Wang, Ziwei and Ng, Yonhon and Scheerlinck, Cedric and Mahony, Robert},
-    title     = {An Asynchronous Kalman Filter for Hybrid Event Cameras},
-    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
-    month     = {October},
-    year      = {2021},
-    pages     = {448-457}
+<pre>
+@article{wang2023asynchronous,
+  title={An Asynchronous Linear Filter Architecture for Hybrid Event-Frame Cameras},
+  author={Wang, Ziwei and Ng, Yonhon and Scheerlinck, Cedric and Mahony, Robert},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2023},
+  publisher={IEEE}
 }
 </pre>
 
