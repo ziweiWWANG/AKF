@@ -90,10 +90,41 @@ First row shows the low dynamic range frames and the second row shows the high d
 #### [Click Here To Download Raw Data](https://drive.google.com/drive/folders/1JYdvY2GqgD3RC-rczgf8t1JoIuBqoJvp?usp=sharing)
 Raw data includes raw events, HDR ground truth images, LDR images, exposure time, etc. This can be directly used for AKF.
 
+Example of loading our HDR dataset in Python:
+```
+import h5py
+file_path = '../Downloads/tree3.mat'
+with h5py.File(file_path, 'r') as f:
+    events = f['events'][:] 
+    HDR_hdr_rgb = f['HDR_mat'][:]
+    image_ldr_bw = f['image'][:]
+    time_image = f['time_image'][:]
+```
+
 #### [Click Here To Download Event and Frame Pairs](https://drive.google.com/drive/folders/1fH7TurmZ68WQunNP4RfTUeeMOiD7RGfX?usp=sharing)
 For some methods which require event reconstruction and frame pairs, we provide reconstructed event data using the E2VID event reconstruction algorithm [[Rebecq et al., TPAMI 2019]](https://github.com/uzh-rpg/rpg_e2vid).
 
+### Our AHDR Hybrid Event-Frame Dataset
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=XPz7laloKws">
+    <img src="figures/ahdr-dataset_.png" alt="Our AHDR Hybrid Event-Frame Dataset" width="700"/>
+  </a>
+</p>
+For our AHDR dataset, we apply an artificial camera
+response function to RGB camera output frames to simulate
+a low dynamic range camera. The resulting image noise covariance should be high for the ‘cropped’ intensity values. You can adjust `f_Q` if needed.
 
+Download our mountain dataset, lake dataset, and artificial camera response functions `s_curve` here:
+[link](https://drive.google.com/drive/folders/1RXHQGjyit5vqO3l1LEl76XKh9MfkWwbn?usp=sharing). The datasets include raw events and SDR RGB images. Please feel free to use your own data here.
+
+Process SDR to LDR images:
+```
+cut_num = 80; # Choose from 30, 50, 80, 100, 115
+for i = 1:size(img_color,4)
+     load(['Path_to_s_curve/s_curve_' num2str(cut_num) '.mat']);
+     image(:,:,i) = s_curve(rgb2gray(img_color(:,:,:,i)) - 14);
+ end
+```
 
 ### Notes
 1. Make sure your event and image timestamps are well aligned.
