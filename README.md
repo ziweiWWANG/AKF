@@ -38,7 +38,7 @@ If you use or discuss our AKF, please cite our paper as follows:
 
 Please check out our more recent [Event-Asynchronous-Filter](https://github.com/ziweiWWANG/Event-Asynchronous-Filter) (TPAMI 2023) in the same line of work.
 
-The [Event-based Complementary Filter](https://github.com/cedric-scheerlinck/dvs_image_reconstruction) is integrated into a unified pipeline.
+The [Event-based Complementary Filter](https://github.com/cedric-scheerlinck/dvs_image_reconstruction) is integrated into a unified pipeline and tested on more datasets.
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=v3alkA0rWvo">
